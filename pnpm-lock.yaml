@@ -220,9 +220,6 @@ importers:
       got:
         specifier: ^16.0.0
         version: 16.0.0
-      got-fetch:
-        specifier: ^6.0.2
-        version: 6.0.2(got@16.0.0)
       js-yaml:
         specifier: ^5.4.3
         version: 5.4.3
@@ -1657,13 +1654,6 @@ packages:
     resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
     deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
-
-  got-fetch@6.0.2:
-    resolution: {integrity: sha512-bsoq+D1bvnh+ZNomzJE0d1z9BGp3I6+Z7Sk0nUqzVFQ2XpcViYFBg7kvJjnGsqKn1Lo4T4tz0uXhvOYf+wpdTg==}
-    engines: {node: '>=20.0.0'}
-    deprecated: please use built-in fetch in nodejs
-    peerDependencies:
-      got: ^14.0.0
 
   got@16.0.0:
     resolution: {integrity: sha512-UtzSUebtRHHAUaNB/X37X1LQgHvdSrgXUIWGUBDhLu05CYtUr9svjeN6wmG333nzdJASFUjXMOuRBjZLf8oF1w==}
@@ -3467,10 +3457,6 @@ snapshots:
       minipass: 7.1.2
       package-json-from-dist: 1.0.1
       path-scurry: 1.11.1
-
-  got-fetch@6.0.2(got@16.0.0):
-    dependencies:
-      got: 16.0.0
 
   got@16.0.0:
     dependencies:
