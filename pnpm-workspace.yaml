@@ -3,7 +3,7 @@ packages:
   - plugins/**
   - examples/**
 allowBuilds:
-  '@swc/core': true
+  "@swc/core": true
   esbuild: true
 minimumReleaseAgeExclude:
   - nock@15.0.1

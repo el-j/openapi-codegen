@@ -30,7 +30,12 @@ export type GithubContext<
      * Set this to `false` to disable automatic refetching when the query mounts or changes query keys.
      * Defaults to `true`.
      */
-    enabled?: UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>["enabled"];
+    enabled?: UseQueryOptions<
+      TQueryFnData,
+      TError,
+      TData,
+      TQueryKey
+    >["enabled"];
   };
 };
 
