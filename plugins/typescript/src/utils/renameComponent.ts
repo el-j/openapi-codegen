@@ -1,4 +1,4 @@
-import { get, set, unset } from "lodash";
+import { get, set, unset } from "../utils/lodash-interop";
 import { OpenAPIObject } from "openapi3-ts/oas30";
 
 /**

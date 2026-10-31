@@ -2,8 +2,8 @@
 
 import { Cli } from "clipanion";
 
-import { GenerateCommand } from "./commands/GenerateCommand.js";
-import { InitCommand } from "./commands/InitCommand.js";
+import { GenerateCommand } from "./commands/GenerateCommand";
+import { InitCommand } from "./commands/InitCommand";
 import { readFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";

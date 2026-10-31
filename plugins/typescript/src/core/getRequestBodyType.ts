@@ -1,11 +1,12 @@
-import ts, { factory as f } from "typescript";
+import * as ts from "typescript/ast";
+import * as f from "typescript/ast/factory";
 import {
   ComponentsObject,
   isReferenceObject,
   ReferenceObject,
   RequestBodyObject,
 } from "openapi3-ts/oas30";
-import { pascal } from "case";
+import { pascal } from "../utils/case-interop";
 
 import { findCompatibleMediaType } from "./findCompatibleMediaType";
 import { getType } from "./schemaToTypeAliasDeclaration";

@@ -1,6 +1,6 @@
-import { camelCase } from "lodash";
+import { camelCase } from "../utils/lodash-interop";
 import { OperationObject } from "openapi3-ts/oas30";
-import ts, { factory as f } from "typescript";
+import ts, { factory as f } from "../typescript";
 import { camelizedPathParams } from "./camelizedPathParams";
 
 /**

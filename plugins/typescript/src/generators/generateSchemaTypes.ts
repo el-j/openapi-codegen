@@ -1,5 +1,5 @@
-import * as c from "case";
-import ts from "typescript";
+import * as c from "../utils/case-interop";
+import ts from "../typescript";
 
 import { ReferenceObject, SchemaObject } from "openapi3-ts/oas30";
 import { createWatermark } from "../core/createWatermark";

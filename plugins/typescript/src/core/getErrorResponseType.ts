@@ -1,4 +1,4 @@
-import ts, { factory as f } from "typescript";
+import ts, { factory as f } from "../typescript";
 import {
   ComponentsObject,
   isReferenceObject,
@@ -9,7 +9,7 @@ import {
 
 import { findCompatibleMediaType } from "./findCompatibleMediaType";
 import { getType } from "./schemaToTypeAliasDeclaration";
-import { pascal } from "case";
+import { pascal } from "../utils/case-interop";
 
 export const clientErrorStatus = "ClientErrorStatus";
 export const serverErrorStatus = "ServerErrorStatus";

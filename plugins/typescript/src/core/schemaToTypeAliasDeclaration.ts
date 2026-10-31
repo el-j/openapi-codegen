@@ -1,5 +1,11 @@
-import { pascal } from "case";
-import { keys, pickBy, intersection, merge, omit } from "lodash";
+import { pascal } from "../utils/case-interop";
+import {
+  keys,
+  pickBy,
+  intersection,
+  merge,
+  omit,
+} from "../utils/lodash-interop";
 import {
   ComponentsObject,
   DiscriminatorObject,
@@ -9,12 +15,12 @@ import {
   isReferenceObject,
   isSchemaObject,
 } from "openapi3-ts/oas30";
-import { singular } from "pluralize";
+import { singular } from "../utils/pluralize-interop";
 import ts, {
   factory as f,
   isIdentifierPart,
   isIdentifierStart,
-} from "typescript";
+} from "../typescript";
 import { convertNumberToWord } from "../utils/getEnumProperties";
 import { isValidIdentifier } from "../utils/isValidIdentifier";
 import { getReferenceSchema } from "./getReference";

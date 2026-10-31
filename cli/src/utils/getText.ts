@@ -1,11 +1,9 @@
-import ts from "typescript";
+import { isStringLiteral } from "typescript/ast";
+import type { Expression } from "typescript/ast";
 
-export function getText(expression: ts.Expression) {
-  try {
-    return (
-      ((expression as unknown as Record<string, unknown>).text as string) ?? ""
-    );
-  } catch {
-    return "";
+export function getText(expression: Expression) {
+  if (!isStringLiteral(expression)) {
+    throw new TypeError("Expected a string literal module specifier");
   }
+  return expression.text;
 }

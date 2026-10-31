@@ -1,5 +1,5 @@
 import { OpenAPIObject } from "openapi3-ts/oas30";
-import * as c from "case";
+import * as c from "../utils/case-interop";
 
 /**
  * Generator context (provided by `@openapi-codegen/cli`)

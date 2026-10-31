@@ -1,4 +1,4 @@
-import { camel } from "case";
+import { camel } from "../utils/case-interop";
 
 /**
  * Transform url params case to camel.

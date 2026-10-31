@@ -1,5 +1,6 @@
 import ts from "typescript";
 import type { Import } from "../types";
+import { getText } from "../utils/getText";
 
 const { factory: f } = ts;
 
@@ -182,14 +183,4 @@ function createImportStatements(imports: Map<string, string[]>) {
       printer.printNode(ts.EmitHint.Unspecified, statement, sourceFile)
     )
     .join("\n");
-}
-
-function getText(expression: ts.Expression) {
-  try {
-    return (
-      ((expression as unknown as Record<string, unknown>).text as string) ?? ""
-    );
-  } catch {
-    return "";
-  }
 }
