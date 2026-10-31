@@ -1,4 +1,4 @@
-import { camel } from "case";
+import { camel } from "../utils/case-interop";
 import { ParameterObject, SchemaObject } from "openapi3-ts/oas30";
 
 /**

@@ -1,4 +1,4 @@
-import { camel, pascal } from "case";
+import { camel, pascal } from "../utils/case-interop";
 
 /**
  * Get fetcher template

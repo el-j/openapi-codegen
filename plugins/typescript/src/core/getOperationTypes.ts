@@ -1,10 +1,11 @@
-import { pascal } from "case";
+import { pascal } from "../utils/case-interop";
 import {
   OpenAPIObject,
   OperationObject,
   PathItemObject,
 } from "openapi3-ts/oas30";
-import ts, { factory as f } from "typescript";
+import * as ts from "typescript/ast";
+import * as f from "typescript/ast/factory";
 
 import { getParamsGroupByType } from "./getParamsGroupByType";
 import { getRequestBodyType } from "./getRequestBodyType";
@@ -134,28 +135,30 @@ export const getOperationTypes = ({
   const errorTypeIdentifier = pascal(`${operationId}Error`);
   declarationNodes.push(
     f.createTypeAliasDeclaration(
-      [f.createModifier(ts.SyntaxKind.ExportKeyword)],
+      [f.createToken(ts.SyntaxKind.ExportKeyword)],
       f.createIdentifier(errorTypeIdentifier),
       undefined,
       errorType
     )
   );
 
-  errorType = f.createTypeReferenceNode(errorTypeIdentifier);
+  errorType = f.createTypeReferenceNode(
+    f.createIdentifier(errorTypeIdentifier)
+  );
 
   // Export data type if needed
   if (shouldExtractNode(dataType)) {
     const dataTypeIdentifier = pascal(`${operationId}Response`);
     declarationNodes.push(
       f.createTypeAliasDeclaration(
-        [f.createModifier(ts.SyntaxKind.ExportKeyword)],
+        [f.createToken(ts.SyntaxKind.ExportKeyword)],
         f.createIdentifier(dataTypeIdentifier),
         undefined,
         dataType
       )
     );
 
-    dataType = f.createTypeReferenceNode(dataTypeIdentifier);
+    dataType = f.createTypeReferenceNode(f.createIdentifier(dataTypeIdentifier));
   }
 
   // Export requestBody type if needed
@@ -163,29 +166,37 @@ export const getOperationTypes = ({
     const requestBodyIdentifier = pascal(`${operationId}RequestBody`);
     declarationNodes.push(
       f.createTypeAliasDeclaration(
-        [f.createModifier(ts.SyntaxKind.ExportKeyword)],
+        [f.createToken(ts.SyntaxKind.ExportKeyword)],
         f.createIdentifier(requestBodyIdentifier),
         undefined,
         requestBodyType
       )
     );
 
-    requestBodyType = f.createTypeReferenceNode(requestBodyIdentifier);
+    requestBodyType = f.createTypeReferenceNode(
+      f.createIdentifier(requestBodyIdentifier)
+    );
   }
 
   const pathParamsType =
     pathParams.length > 0
-      ? f.createTypeReferenceNode(`${pascal(operationId)}PathParams`)
+      ? f.createTypeReferenceNode(
+          f.createIdentifier(`${pascal(operationId)}PathParams`)
+        )
       : f.createTypeLiteralNode([]);
 
   const queryParamsType =
     queryParams.length > 0
-      ? f.createTypeReferenceNode(`${pascal(operationId)}QueryParams`)
+      ? f.createTypeReferenceNode(
+          f.createIdentifier(`${pascal(operationId)}QueryParams`)
+        )
       : f.createTypeLiteralNode([]);
 
   const headersType =
     headerParams.length > 0
-      ? f.createTypeReferenceNode(`${pascal(operationId)}Headers`)
+      ? f.createTypeReferenceNode(
+          f.createIdentifier(`${pascal(operationId)}Headers`)
+        )
       : f.createTypeLiteralNode([]);
 
   // Generate fetcher variables type
@@ -215,14 +226,16 @@ export const getOperationTypes = ({
   if (variablesType.kind !== ts.SyntaxKind.VoidKeyword) {
     declarationNodes.push(
       f.createTypeAliasDeclaration(
-        [f.createModifier(ts.SyntaxKind.ExportKeyword)],
+        [f.createToken(ts.SyntaxKind.ExportKeyword)],
         f.createIdentifier(variablesIdentifier),
         undefined,
         variablesType
       )
     );
 
-    variablesType = f.createTypeReferenceNode(variablesIdentifier);
+    variablesType = f.createTypeReferenceNode(
+      f.createIdentifier(variablesIdentifier)
+    );
   }
 
   return {

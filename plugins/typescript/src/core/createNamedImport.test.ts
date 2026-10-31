@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { createNamedImport, shouldUseTypeImport } from "./createNamedImport";
 import { analyzeImportUsage } from "./analyzeImportUsage";
-import { factory as f } from "typescript";
-import * as ts from "typescript";
+import * as f from "typescript/ast/factory";
+import * as ts from "typescript/ast";
 
 // Helper function to set parent references in AST nodes
 const setParentReferences = (node: ts.Node): ts.Node => {
@@ -22,23 +22,17 @@ const setParentReferences = (node: ts.Node): ts.Node => {
 describe("createNamedImport", () => {
   it("should create a regular import when isTypeOnly is false", () => {
     const result = createNamedImport("MyType", "./types", false);
-    expect(
-      (result.importClause as unknown as Record<string, unknown>)?.isTypeOnly
-    ).toBe(false);
+    expect(result.importClause?.phaseModifier).toBeUndefined();
   });
 
   it("should create a type-only import when isTypeOnly is true", () => {
     const result = createNamedImport("MyType", "./types", true);
-    expect(
-      (result.importClause as unknown as Record<string, unknown>)?.isTypeOnly
-    ).toBe(true);
+    expect(result.importClause?.phaseModifier).toBe(ts.SyntaxKind.TypeKeyword);
   });
 
   it("should handle array of imports", () => {
     const result = createNamedImport(["Type1", "Type2"], "./types", true);
-    expect(
-      (result.importClause as unknown as Record<string, unknown>)?.isTypeOnly
-    ).toBe(true);
+    expect(result.importClause?.phaseModifier).toBe(ts.SyntaxKind.TypeKeyword);
     expect(result.importClause?.namedBindings).toBeDefined();
   });
 });
@@ -63,7 +57,7 @@ describe("analyzeImportUsage", () => {
           undefined,
           f.createIdentifier("MyType"),
           undefined,
-          f.createTypeReferenceNode(f.createIdentifier("User"), undefined)
+          f.createTypeReferenceNode(f.createIdentifier("User"))
         )
       ),
     ];
@@ -74,7 +68,13 @@ describe("analyzeImportUsage", () => {
   it("should detect value usage", () => {
     const nodes = [
       setParentReferences(
-        f.createCallExpression(f.createIdentifier("fetchData"), undefined, [])
+        f.createCallExpression(
+          f.createIdentifier("fetchData"),
+          undefined,
+          undefined,
+          [],
+          0
+        )
       ),
     ];
 
@@ -88,11 +88,17 @@ describe("analyzeImportUsage", () => {
           undefined,
           f.createIdentifier("MyType"),
           undefined,
-          f.createTypeReferenceNode(f.createIdentifier("User"), undefined)
+          f.createTypeReferenceNode(f.createIdentifier("User"))
         )
       ),
       setParentReferences(
-        f.createCallExpression(f.createIdentifier("User"), undefined, [])
+        f.createCallExpression(
+          f.createIdentifier("User"),
+          undefined,
+          undefined,
+          [],
+          0
+        )
       ),
     ];
 

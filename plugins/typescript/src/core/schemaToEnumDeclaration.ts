@@ -1,6 +1,7 @@
-import { pascal } from "case";
+import { pascal } from "../utils/case-interop";
 import { SchemaObject } from "openapi3-ts/oas30";
-import ts, { factory as f } from "typescript";
+import * as ts from "typescript/ast";
+import * as f from "typescript/ast/factory";
 import { convertNumberToWord } from "../utils/getEnumProperties";
 import { isValidIdentifier } from "../utils/isValidIdentifier";
 import { Context, getJSDocComment } from "./schemaToTypeAliasDeclaration";
@@ -20,8 +21,8 @@ export const schemaToEnumDeclaration = (
   const jsDocNode = getJSDocComment(schema, context);
   const members = getEnumMembers(schema);
   const declarationNode = f.createEnumDeclaration(
-    [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-    pascal(name),
+    [f.createToken(ts.SyntaxKind.ExportKeyword)],
+    f.createIdentifier(pascal(name)),
     members
   );
 
@@ -48,12 +49,12 @@ function getEnumMembers(schema: SchemaObject): ts.EnumMember[] {
         } else {
           enumName = enumValue;
         }
-        enumValueNode = f.createStringLiteral(enumValue);
+        enumValueNode = f.createStringLiteral(enumValue, 0);
       } else if (typeof enumValue === "number") {
         enumName = convertNumberToWord(enumValue)
           .toUpperCase()
           .replace(/[-\s]/g, "_");
-        enumValueNode = f.createNumericLiteral(enumValue);
+        enumValueNode = f.createNumericLiteral(String(enumValue), 0);
       } else if (typeof enumValue === "boolean") {
         enumName = enumValue ? "True" : "False";
       } else if (enumValue === null) {
@@ -67,7 +68,7 @@ function getEnumMembers(schema: SchemaObject): ts.EnumMember[] {
       return f.createEnumMember(
         isValidIdentifier(enumName)
           ? f.createIdentifier(enumName)
-          : f.createStringLiteral(`${enumValue}`),
+          : f.createStringLiteral(`${enumValue}`, 0),
         enumValueNode
       );
     })

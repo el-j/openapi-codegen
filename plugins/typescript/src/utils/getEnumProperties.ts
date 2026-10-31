@@ -1,4 +1,4 @@
-import { pascal } from "case";
+import { pascal } from "../utils/case-interop";
 import {
   isReferenceObject,
   ReferenceObject,

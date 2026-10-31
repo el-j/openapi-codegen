@@ -1,4 +1,4 @@
-import ts from "typescript";
+import * as ts from "typescript/ast";
 
 /**
  * Determines if a node represents a value usage context
@@ -68,7 +68,10 @@ export const analyzeImportUsage = (
         return !(usages.type && usages.value);
       }
 
-      return !ts.forEachChild(node, (child) => !checkNode(child as ts.Node));
+      return !(
+        typeof node.forEachChild === "function" &&
+        node.forEachChild((child) => !checkNode(child))
+      );
     };
 
     nodes.every(checkNode);

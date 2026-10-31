@@ -1,5 +1,6 @@
-import { factory as f } from "typescript";
-import type * as ts from "typescript";
+import * as f from "typescript/ast/factory";
+import { SyntaxKind } from "typescript/ast";
+import type * as ts from "typescript/ast";
 import { analyzeImportUsage } from "./analyzeImportUsage";
 
 /**
@@ -19,7 +20,7 @@ export const createNamedImport = (
   return f.createImportDeclaration(
     undefined,
     f.createImportClause(
-      isTypeOnly,
+      isTypeOnly ? SyntaxKind.TypeKeyword : undefined,
       undefined,
       f.createNamedImports(
         fnNames.map((name) =>
@@ -27,7 +28,7 @@ export const createNamedImport = (
         )
       )
     ),
-    f.createStringLiteral(filename),
+    f.createStringLiteral(filename, 0),
     undefined
   );
 };
@@ -81,8 +82,8 @@ export const createNamedImportWithTypes = (
 
   return f.createImportDeclaration(
     undefined,
-    f.createImportClause(false, undefined, f.createNamedImports(allImports)),
-    f.createStringLiteral(filename),
+    f.createImportClause(undefined, undefined, f.createNamedImports(allImports)),
+    f.createStringLiteral(filename, 0),
     undefined
   );
 };

@@ -1,4 +1,4 @@
-import { get, groupBy } from "lodash";
+import { get, groupBy } from "../utils/lodash-interop";
 import {
   ComponentsObject,
   isReferenceObject,

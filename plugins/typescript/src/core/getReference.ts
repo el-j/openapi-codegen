@@ -1,4 +1,4 @@
-import { get } from "lodash";
+import { get } from "../utils/lodash-interop";
 import {
   ComponentsObject,
   isReferenceObject,

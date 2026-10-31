@@ -12,10 +12,10 @@ import type { FileOptions, FromOptions, UrlOptions, Plugin } from "../types";
 import {
   generateConfigProperty,
   getImports,
-} from "../core/generateConfigProperty.js";
-import { getText } from "../utils/getText.js";
-import emptyConfig from "../templates/emptyConfig.js";
-import { updateConfig } from "../core/updateConfig.js";
+} from "../core/generateConfigProperty";
+import { getText } from "../utils/getText";
+import emptyConfig from "../templates/emptyConfig";
+import { updateConfig } from "../core/updateConfig";
 import { handlePromptCancel } from "../utils/handlePromptCancel";
 
 export class InitCommand extends Command {

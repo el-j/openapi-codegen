@@ -1,4 +1,5 @@
-import ts, { factory as f } from "typescript";
+import * as ts from "typescript/ast";
+import * as f from "typescript/ast/factory";
 import {
   ComponentsObject,
   isReferenceObject,
@@ -6,8 +7,8 @@ import {
   ResponseObject,
   ResponsesObject,
 } from "openapi3-ts/oas30";
-import { uniqBy } from "lodash";
-import { pascal } from "case";
+import { uniqBy } from "../utils/lodash-interop";
+import { pascal } from "../utils/case-interop";
 
 import { findCompatibleMediaType } from "./findCompatibleMediaType";
 import { getType } from "./schemaToTypeAliasDeclaration";

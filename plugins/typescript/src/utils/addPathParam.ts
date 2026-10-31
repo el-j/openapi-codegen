@@ -1,4 +1,4 @@
-import { mapValues } from "lodash";
+import { mapValues } from "../utils/lodash-interop";
 import { OpenAPIObject, PathItemObject } from "openapi3-ts/oas30";
 
 /**

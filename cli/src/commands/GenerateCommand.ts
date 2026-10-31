@@ -9,8 +9,8 @@ import { fileURLToPath } from "url";
 import slash from "slash";
 
 import { Config, FromOptions, Namespace } from "../types";
-import { getOpenAPISourceFile } from "../core/getOpenAPISourceFile.js";
-import { parseOpenAPISourceFile } from "../core/parseOpenAPISourceFile.js";
+import { getOpenAPISourceFile } from "../core/getOpenAPISourceFile";
+import { parseOpenAPISourceFile } from "../core/parseOpenAPISourceFile";
 import { getGithubToken } from "../utils/getGithubToken";
 import { resolveGithubPullRequest } from "../utils/resolveGithubPullRequest";
 

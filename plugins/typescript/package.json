@@ -2,6 +2,7 @@
   "name": "@openapi-codegen/typescript",
   "version": "11.3.0",
   "description": "OpenAPI Codegen typescript generators",
+  "type": "module",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": {
@@ -12,7 +13,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "pnpm --workspace-root tsc -p plugins/typescript/tsconfig.package.json",
+    "build": "pnpm --workspace-root tsc --emitDeclarationOnly --declaration -p plugins/typescript/tsconfig.package.json && tsup src/index.ts --outDir lib --format esm",
     "prepublishOnly": "pnpm build"
   },
   "files": [
@@ -38,6 +39,7 @@
   "devDependencies": {
     "@types/lodash": "^4.17.25",
     "@types/pluralize": "^0.0.33",
-    "@types/qs": "^6.15.1"
+    "@types/qs": "^6.15.1",
+    "tsup": "^8.5.1"
   }
 }

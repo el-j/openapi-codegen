@@ -1,6 +1,6 @@
-import ts, { factory as f } from "typescript";
-import * as c from "case";
-import { get } from "lodash";
+import ts, { factory as f } from "../typescript";
+import * as c from "../utils/case-interop";
+import { get } from "../utils/lodash-interop";
 
 import { ConfigBase, Context } from "./types";
 import { PathItemObject } from "openapi3-ts/oas30";

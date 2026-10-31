@@ -1,4 +1,5 @@
-import { factory as f } from "typescript";
+import * as f from "typescript/ast/factory";
+import { SyntaxKind } from "typescript/ast";
 
 /**
  * Helper to create namespace import.
@@ -11,10 +12,10 @@ export const createNamespaceImport = (namespace: string, filename: string) =>
   f.createImportDeclaration(
     undefined,
     f.createImportClause(
-      true,
+      SyntaxKind.TypeKeyword,
       undefined,
       f.createNamespaceImport(f.createIdentifier(namespace))
     ),
-    f.createStringLiteral(filename),
+    f.createStringLiteral(filename, 0),
     undefined
   );

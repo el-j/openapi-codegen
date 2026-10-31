@@ -1,4 +1,4 @@
-import { cloneDeep, set } from "lodash";
+import { cloneDeep, set } from "../utils/lodash-interop";
 import { OpenAPIObject, PathItemObject } from "openapi3-ts/oas30";
 
 import { isOperationObject } from "../core/isOperationObject";

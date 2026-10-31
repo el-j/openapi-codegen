@@ -1,4 +1,4 @@
-import ts, { factory as f } from "typescript";
+import ts, { factory as f } from "../typescript";
 
 /**
  * Get fetcher variables types from the operation types

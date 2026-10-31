@@ -1,5 +1,5 @@
 import { InfoObject } from "openapi3-ts/oas30";
-import { factory as f } from "typescript";
+import { factory as f } from "../typescript";
 
 /**
  * Generate a JSDoc comment with the generated watermark and `info.version`

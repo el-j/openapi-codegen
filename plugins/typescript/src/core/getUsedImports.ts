@@ -1,6 +1,7 @@
-import { camel } from "case";
-import { get } from "lodash";
-import ts, { factory as f } from "typescript";
+import { camel } from "../utils/case-interop";
+import { get } from "../utils/lodash-interop";
+import * as ts from "typescript/ast";
+import * as f from "typescript/ast/factory";
 import { createNamedImport } from "./createNamedImport";
 import { createNamespaceImport } from "./createNamespaceImport";
 import { clientErrorStatus, serverErrorStatus } from "./getErrorResponseType";
@@ -81,7 +82,9 @@ export const getUsedImports = (
         imports.utils.imports.add(serverErrorStatus);
       }
     }
-    return ts.forEachChild(node, visitor);
+    return typeof node.forEachChild === "function"
+      ? node.forEachChild(visitor)
+      : undefined;
   };
 
   ts.visitNodes(f.createNodeArray(nodes), visitor);
